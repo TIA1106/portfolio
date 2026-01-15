@@ -9,7 +9,7 @@ export async function POST(req) {
       service: 'gmail',
       auth: {
         user: 'funwithdrisha@gmail.com',
-        pass: process.env.pass, // Ensure this is your 16-digit App Password
+        pass: odcgcplelqsccqtk, // Ensure this is your 16-digit App Password
       },
     });
 
