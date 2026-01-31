@@ -30,7 +30,7 @@ export const TextGenerateEffect = ({ words, className }) => {
           return (
             <motion.span
               key={word + idx}
-              className="dark:text-white text-black opacity-0 inline-block"
+              className="text-black opacity-0 inline-block"
               style={{
                 filter: "blur(10px)",
                 transform: "translateY(10px)",
