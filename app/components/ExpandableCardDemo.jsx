@@ -2,7 +2,7 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { ExternalLink, Sparkles, BrainCircuit, Layers, Cpu, TrendingUp, Music, Database, Code2, Workflow } from "lucide-react";
+import { ExternalLink, Sparkles, BrainCircuit, Layers, Cpu, TrendingUp, Music, Database, Code2, Workflow, HeartPulse } from "lucide-react";
 
 const ColorBlock = ({ color, title, icon: Icon }) => (
   <div className={`w-full h-full ${color} bg-noise flex flex-col items-center justify-center relative overflow-hidden group`}>
@@ -14,7 +14,7 @@ const ColorBlock = ({ color, title, icon: Icon }) => (
   </div>
 );
 
-export default function ExpandableCardDemo() {
+export default function ExpandableCardDemo({ limit }) {
   const [active, setActive] = useState(null);
   const ref = useRef(null);
   const id = useId();
@@ -31,6 +31,8 @@ export default function ExpandableCardDemo() {
 
   useOutsideClick(ref, () => setActive(null));
 
+  const displayCards = limit ? cards.slice(0, limit) : cards;
+
   return (
     <div className="py-10">
       <AnimatePresence>
@@ -43,10 +45,10 @@ export default function ExpandableCardDemo() {
           />
         )}
       </AnimatePresence>
-      
+
       <AnimatePresence>
         {active ? (
-          <div className="fixed inset-0 grid place-items-center z-[5000] p-4 pt-32 md:pt-40">
+          <div className="fixed inset-0 grid place-items-center z-[5000] p-4 pt-12 md:pt-40">
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
@@ -54,23 +56,27 @@ export default function ExpandableCardDemo() {
             >
               <motion.div layoutId={`image-${active.title}-${id}`}>
                 <div className="w-full h-56 lg:h-72 overflow-hidden relative">
+                  {active.src ? (
+                    <img src={active.src} alt={active.title} className="w-full h-full object-cover object-top" />
+                  ) : (
                     <ColorBlock color={active.color} title={active.title} icon={active.icon} />
-                    <button 
-                      className="absolute top-6 right-6 bg-black/60 hover:bg-white hover:text-black text-white p-2 rounded-full backdrop-blur-md transition-all"
-                      onClick={() => setActive(null)}
-                    >
-                      <CloseIcon />
-                    </button>
+                  )}
+                  <button
+                    className="absolute top-4 right-4 bg-black/60 hover:bg-white hover:text-black text-white p-2 rounded-full backdrop-blur-md transition-all"
+                    onClick={() => setActive(null)}
+                  >
+                    <CloseIcon />
+                  </button>
                 </div>
               </motion.div>
 
               <div className="overflow-auto bg-zinc-950 flex-1 custom-scrollbar">
-                <div className="flex justify-between items-start p-8">
+                <div className="flex flex-col md:flex-row justify-between items-start p-6 md:p-8 gap-4">
                   <div className="space-y-1">
-                    <motion.h3 layoutId={`title-${active.title}-${id}`} className="font-black text-3xl text-white tracking-tighter italic uppercase">
+                    <motion.h3 layoutId={`title-${active.title}-${id}`} className="font-black text-2xl md:text-3xl text-white tracking-tighter italic uppercase">
                       {active.title}
                     </motion.h3>
-                    <motion.p layoutId={`description-${active.description}-${id}`} className="text-funky-pink font-bold text-xs uppercase tracking-[0.2em]">
+                    <motion.p layoutId={`description-${active.description}-${id}`} className="text-funky-pink font-bold text-[10px] md:text-xs uppercase tracking-[0.2em]">
                       {active.description}
                     </motion.p>
                   </div>
@@ -78,13 +84,13 @@ export default function ExpandableCardDemo() {
                     layoutId={`button-${active.title}-${id}`}
                     href={active.ctaLink}
                     target="_blank"
-                    className="flex items-center gap-2 px-6 py-3 text-xs rounded-full font-black bg-white text-black hover:bg-funky-pink hover:text-white transition-all tracking-widest"
+                    className="flex items-center justify-center w-full md:w-auto gap-2 px-6 py-3 text-xs rounded-full font-black bg-white text-black hover:bg-funky-pink hover:text-white transition-all tracking-widest"
                   >
-                    VIEW REPOSITORY <ExternalLink size={14} />
+                    VIEW PROJECT <ExternalLink size={14} />
                   </motion.a>
                 </div>
 
-                <div className="px-8 pb-10 text-zinc-400 leading-relaxed text-sm md:text-base">
+                <div className="px-6 md:px-8 pb-10 text-zinc-400 leading-relaxed text-sm md:text-base">
                   <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
                     {active.content()}
                     <div className="pt-6 border-t border-white/5 flex flex-wrap gap-2">
@@ -101,7 +107,7 @@ export default function ExpandableCardDemo() {
           </div>
         ) : null}
       </AnimatePresence>
-      
+
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col items-center mb-16 text-center">
           <span className="text-funky-pink font-black text-[10px] tracking-[0.5em] uppercase mb-4">Portfolio Index</span>
@@ -111,7 +117,7 @@ export default function ExpandableCardDemo() {
         </div>
 
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {cards.map((card) => (
+          {displayCards.map((card) => (
             <motion.div
               layoutId={`card-${card.title}-${id}`}
               key={`card-${card.title}-${id}`}
@@ -121,10 +127,14 @@ export default function ExpandableCardDemo() {
             >
               <motion.div layoutId={`image-${card.title}-${id}`} className="mb-6">
                 <div className="h-44 w-full rounded-3xl overflow-hidden shadow-inner">
+                  {card.src ? (
+                    <img src={card.src} alt={card.title} className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                  ) : (
                     <ColorBlock color={card.color} title={card.title} icon={card.icon} />
+                  )}
                 </div>
               </motion.div>
-              
+
               <div className="flex flex-col flex-1 px-2">
                 <motion.h3 layoutId={`title-${card.title}-${id}`} className="font-black text-white text-2xl tracking-tight mb-1 uppercase italic">
                   {card.title}
@@ -142,21 +152,46 @@ export default function ExpandableCardDemo() {
 }
 
 const CloseIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 6l-12 12" /><path d="M6 6l12 12" />
-    </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 6l-12 12" /><path d="M6 6l12 12" />
+  </svg>
 );
 
 const cards = [
   {
     title: "TiaType Pro",
-    description: "AI Content Ecosystem / GPT-4",
+    description: "AI-First Blogging Platform",
     icon: Sparkles,
     color: "bg-zinc-800",
-    tags: ["Next.js 14", "OpenAI GPT-4", "MongoDB", "Web Speech API"],
+    src: "/tiatype.png",
+    tags: ["Next.js", "AI APIs", "Database", "Auth"],
     ctaLink: "https://github.com/TIA1106/tiatype-pro",
     content: () => (
-      <p>A sophisticated AI-powered blogging platform featuring real-time grammar correction, tone shifting, and automated summarization. Implements <strong>GPT-4 orchestration</strong> for content intelligence and Web Speech API for integrated voice dictation.</p>
+      <p>Built an <strong>AI-first blogging platform</strong> using Next.js and AI APIs, enabling AI-powered content creation and editing workflows. Implemented authentication and database-backed publishing, supporting secure user access and persistent blog management. Designed <strong>scalable content workflows</strong> with seamless AI integration, focusing on performance, usability, and production-ready architecture.</p>
+    ),
+  },
+  {
+    title: "TiaSumé",
+    description: "AI-Enhanced Resume Builder",
+    icon: Database,
+    color: "bg-rose-950",
+    src: "/tiasume.png",
+    tags: ["React", "Node.js", "MongoDB", "AI-Enhanced"],
+    ctaLink: "https://tiasume.vercel.app",
+    content: () => (
+      <p>Built an <strong>AI-enhanced resume builder</strong> using React, Node.js, and MongoDB, supporting both manual resume creation and AI-assisted content enhancement. Designed the system to operate independently of AI, ensuring <strong>reliable functionality</strong> with graceful fallback when AI services are unavailable. Deployed on Vercel with secure data storage.</p>
+    ),
+  },
+  {
+    title: "CarePlus",
+    description: "Full-Stack Healthcare Platform",
+    icon: HeartPulse,
+    color: "bg-emerald-950",
+    src: "/careplus.png",
+    tags: ["Full-Stack", "Real-time", "Management", "Healthcare"],
+    ctaLink: "https://careplus-tau.vercel.app",
+    content: () => (
+      <p>Designed and developed a <strong>full-stack clinic management system</strong> enabling online doctor appointments, real-time queue management, and virtual consultations. Focused on <strong>scalability, usability, and data-driven insights</strong> for modern healthcare operations.</p>
     ),
   },
   {
@@ -212,17 +247,6 @@ const cards = [
     ctaLink: "https://github.com/TIA1106/spotify-hit-classifier",
     content: () => (
       <p>A high-precision predictive model for acoustic market analysis. Trained on Spotify audio features, this <strong>Random Forest Classifier</strong> achieves 99% accuracy in predicting song success, validated against multiple ML baselines.</p>
-    ),
-  },
-  {
-    title: "TiaSumé",
-    description: "AI-Assisted Resume System",
-    icon: Database,
-    color: "bg-rose-950",
-    tags: ["Full-Stack", "PDF Parsing", "MongoDB", "AI Generation"],
-    ctaLink: "https://github.com/TIA1106/tiasume",
-    content: () => (
-      <p>An intelligent documentation tool designed for professional optimization. Features a MongoDB-backed profile management system and AI-driven content generation to align resumes with industry-standard technical benchmarks.</p>
     ),
   },
   {

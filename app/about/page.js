@@ -33,7 +33,7 @@ export default function AboutPage() {
               download="Tia_Sukhnanni_Resume.pdf"
               className="mt-8 md:mt-12 w-full flex items-center justify-center gap-4 bg-yellow-400 text-black py-4 md:py-5 border-4 border-black font-black uppercase italic text-xl md:text-2xl shadow-[6px_6px_0px_0px_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all cursor-pointer"
             >
-              <FileDown size={24} /> Grab My CV
+              <FileDown size={24} /> Grab My Resume
             </a>
 
             <div className="mt-6 md:mt-8 p-4 bg-zinc-900/80 border-2 border-white/5 rounded-2xl flex items-center gap-4 shadow-xl">
