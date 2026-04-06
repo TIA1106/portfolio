@@ -159,15 +159,27 @@ const CloseIcon = () => (
 
 const cards = [
   {
-    title: "TiaType Pro",
-    description: "AI-First Blogging Platform",
+    title: "Kisan Saathi",
+    description: "AI-Powered Farmer Companion App",
     icon: Sparkles,
     color: "bg-zinc-800",
-    src: "/tiatype.png",
-    tags: ["Next.js", "AI APIs", "Database", "Auth"],
-    ctaLink: "https://github.com/TIA1106/tiatype-pro",
+    src: "/kisan-saathi.svg",
+    tags: ["Flutter", "Node.js", "Express", "PostgreSQL", "Prisma", "TFLite", "Gemini/Groq"],
+    ctaLink: "https://github.com/NamNam9252/Farmer",
     content: () => (
-      <p>Built an <strong>AI-first blogging platform</strong> using Next.js and AI APIs, enabling AI-powered content creation and editing workflows. Implemented authentication and database-backed publishing, supporting secure user access and persistent blog management. Designed <strong>scalable content workflows</strong> with seamless AI integration, focusing on performance, usability, and production-ready architecture.</p>
+      <p><strong>Group project.</strong> <strong>My contribution:</strong> delivered key full-stack modules in this voice-first agri-tech app, including the <strong>Mandi Bhav frontend revision</strong> with dynamic crop/state/district filters optimized for low-literacy farmer usability. Built RESTful Express.js routes for disease records, market data, and user management, and implemented the crop-diagnosis flow combining on-device <strong>TFLite inference</strong> with cloud AI (Gemini/Groq) for treatment guidance from a single crop image.</p>
+    ),
+  },
+  {
+    title: "CarePlus",
+    description: "Full-Stack Healthcare Platform",
+    icon: HeartPulse,
+    color: "bg-emerald-950",
+    src: "/careplus.png",
+    tags: ["Backend Architecture", "Next.js API Routes", "Appwrite Auth", "Healthcare"],
+    ctaLink: "https://careplus-tau.vercel.app",
+    content: () => (
+      <p><strong>My contribution:</strong> architected and built the complete backend for CarePlus, including RESTful APIs, database schema design, and core server logic using Next.js API routes with Appwrite. Implemented backend flows for doctor appointment booking, real-time queue updates, virtual consultation scheduling, and <strong>role-based authentication</strong> for secure access control.</p>
     ),
   },
   {
@@ -183,15 +195,14 @@ const cards = [
     ),
   },
   {
-    title: "CarePlus",
-    description: "Full-Stack Healthcare Platform",
-    icon: HeartPulse,
-    color: "bg-emerald-950",
-    src: "/careplus.png",
-    tags: ["Full-Stack", "Real-time", "Management", "Healthcare"],
-    ctaLink: "https://careplus-tau.vercel.app",
+    title: "BOLI AI Language Tutor",
+    description: "HackJKLU 1st Runner-Up Build",
+    icon: BrainCircuit,
+    color: "bg-violet-950",
+    tags: ["Next.js", "TypeScript", "NVIDIA NIM", "Adaptive Learning"],
+    ctaLink: "https://github.com/TIA1106/HackJKLU",
     content: () => (
-      <p>Designed and developed a <strong>full-stack clinic management system</strong> enabling online doctor appointments, real-time queue management, and virtual consultations. Focused on <strong>scalability, usability, and data-driven insights</strong> for modern healthcare operations.</p>
+      <p>Developed an <strong>AI conversational language tutor</strong> with adaptive quizzes, flashcards, and progress analytics during a 24-hour hackathon build. Engineered real-time tutoring responses using Next.js, TypeScript, and NVIDIA NIM inference, helping secure <strong>1st Runner-Up</strong> among 66+ teams at HackJKLU Pre-Hackathon 2026.</p>
     ),
   },
   {
