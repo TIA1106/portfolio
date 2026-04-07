@@ -62,7 +62,7 @@ export default function ExpandableCardDemo({ limit }) {
                     <ColorBlock color={active.color} title={active.title} icon={active.icon} />
                   )}
                   <button
-                    className="absolute top-4 right-4 bg-black/60 hover:bg-white hover:text-black text-white p-2 rounded-full backdrop-blur-md transition-all"
+                    className="absolute top-4 right-4 z-20 bg-black/60 hover:bg-white hover:text-black text-white p-2 rounded-full backdrop-blur-md transition-all"
                     onClick={() => setActive(null)}
                   >
                     <CloseIcon />
