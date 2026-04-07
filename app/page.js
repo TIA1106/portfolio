@@ -65,11 +65,11 @@ export default function Home() {
 
 
       {/* NEW PROJECTS SECTION */}
-      <div className="w-full relative z-20 mt-10 md:mt-20">
+      <div className="w-full relative z-30 mt-10 md:mt-20">
         <ExpandableCardDemo limit={3} />
       </div>
 
-      <div className="w-full relative z-30">
+      <div className="w-full relative z-10">
         <FallingSkills />
       </div>
 

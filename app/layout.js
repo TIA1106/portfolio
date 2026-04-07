@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { StarCursor } from "./components/ui/StarCursor";
+import StickyLinks from "./components/StickyLinks";
 
 export const metadata = {
   title: "TIA.S // ML Sorceress",
@@ -16,6 +17,9 @@ export default function RootLayout({ children }) {
         
         {/* The Floating Navigation */}
         <Navbar />
+
+        {/* Global Quick Links */}
+        <StickyLinks />
         
         {/* The Page Content */}
         {children}
